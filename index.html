@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+</head>
+
+<body
+    style="margin: 0 !important; padding: 0 !important; background-color: #FAFAFA; font-family: Arial, Helvetica, sans-serif; font-size: 18px; line-height: 1.2; color: #000000; ">
+
+    <script type="text/template">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                <tr>
+                    <td align="center" style="padding: 2rem 0">
+                        <!-- Set Email Width -->
+                         <table class="main-table" align="center" border="0" cellpadding="0" cellspacing="0" width="600px" style="background-color: #FFFFFF">
+                            <!-- Header Logo -->
+                             <tbody>
+                                <tr>
+                                    <td align="center">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="font-family:'Parisienne', cursive; font-weight:400; font-style: normal; font-size: 36px; padding: 5px 0;">
+                                                      {{business.name}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- Booking Confirmation -->
+                                 <tr style="background-color: #F5F4ED; text-transform: uppercase; "><td align="center" style="color:#1B1715 font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 22px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 15px 0px; ">
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <h2>{{order.type | capitalize }} Confirmation</h2>
+            </td>
+        </tr>
+    </tbody>
+</table>  
+</td></tr>
+                                 <!-- Order is On the Way -->
+                                  <tr>
+                                    <td align="center" style="text-transform: uppercase; font-family: Arial, Helvetica, sans-serif;
+  font-size: 48px;
+  font-weight: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 15px 0px; ">
+  <table align="center">
+    <tbody>
+        <tr>
+            <td  align="center">
+                Your {{order.type | capitalize }} is Confirmed!
+            </td>
+        </tr>
+    </tbody>
+  </table></td>
+                                  </tr>
+                                  <!-- Order Number -->
+                                   <tr>
+                                    <td>
+                                        <table align="center" style="font-size:14px;">
+                                            <tbody>
+                                                <tr align="center">
+                                                    <td align="center">
+                                                        {{order.type | capitalize}} number {{ order.id | prepend: "#" }} has 
+                                                        {% if order.type == "order" %}
+                                                            shipped!
+                                                            {% elsif order.type == "booking" %}
+                                                            been confirmed!
+                                                            {% endif %}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        See below for tracking information.
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                   </tr>
+                                   <!-- Track Package -->
+                                    <tr>
+                                        <td>
+                                            <table align="center">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="text-transform: uppercase; padding: 20px 0; ">
+                                                            <a href="#" style=" padding: 10px 30px; background-color: #1B1715; color: #FAFAFA; font-weight: 700; text-decoration: none;">track {{order.type}}</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- Order Summary Header -->
+                                     <tr >
+                                        <td   >
+                                            <table align="center" style="border-bottom: 2px black solid; padding: 0 50px; width: 80%;"  >
+                                                <tbody >
+                                                    <tr >
+                                                        <td align="center" style="text-transform: uppercase;">
+                                                            <h3 style="padding-top:20px; margin: 4px 0;">Order Summary</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                     </tr>
+                                     <!-- Order Summary Details -->
+                                      <tr width="100%">
+                                       <td width="100%">
+                                        <table align="center" width="100%" style="width:80%;">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="50%" align="left">
+                                                      
+                                                      <table cellspacing="0" cellpadding="0" style="line-height: 20px;">
+                                                        <tbody cellspacing="0" cellpadding="0">
+                                                            <tr cellspacing="0" cellpadding="0" >
+                                                                <p style="font-weight:600; letter-spacing: 2px; font-size:16px; padding: 0;text-transform:uppercase;">Shipping Address</p>
+                                                                
+                                                            </tr>
+                                                            <tr cellspacing="0" cellpadding="0">
+                                                                <td cellspacing="0" cellpadding="0" style="font-weight:300; font-size:14px; padding: 0;">
+                                                                    {{order.user.shipping.first_name | upcase}} {{order.user.shipping.last_name | upcase}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:300; font-size:14px; padding: 0;">{{order.user.shipping.address}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:300; font-size:14px; padding: 0;">{{order.user.shipping.city | capitalize}}, {{order.user.shipping.state | capitalize}}
+                                                                    {{order.user.shipping.zip }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:300; font-size:14px; padding: 0;">{{order.user.shipping.country | upcase}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                      </table> 
+                                                    </td>
+                                                    <td width="50%" align="right">
+                                                         <table cellspacing="0" cellpadding="0" style="line-height: 20px; text-align: right;">
+                                                        <tbody cellspacing="0" cellpadding="0">
+                                                            <tr cellspacing="0" cellpadding="0" >
+                                                                <p style="font-weight:600; letter-spacing: 2px; font-size:16px; padding: 0;text-transform:uppercase;">Billing Address</p>
+                                                                
+                                                            </tr>
+                                                            <tr cellspacing="0" cellpadding="0">
+                                                                <td cellspacing="0" cellpadding="0" style="font-weight:300; font-size:14px; padding: 0;">
+                                                                    {{order.user.billing.first_name | upcase}} {{order.user.billing.last_name | upcase}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:300; font-size:14px; padding: 0;">{{order.user.billing.address}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:300; font-size:14px; padding: 0;">{{order.user.billing.city | capitalize}}, {{order.user.billing.state | capitalize}}
+                                                                    {{order.user.billing.zip }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:300; font-size:14px; padding: 0;">{{order.user.billing.country | upcase}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                      </table> 
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        
+                                       </td>
+                                      </tr>
+                                      <!-- Payment Information -->
+                                       <tr>
+                                        <td>
+                                            <table align="center">
+                                                <tbody align="center">
+                                                    <tr align="center">
+                                                        <td align="center" style="font-weight:600; font-size: 16px; padding: 15px 0">
+                                                            Payment Method
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="font-weight:300; font-size:14px; padding: 0;">
+                                                            {{order.user.payment_method}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                       </tr>
+                                       <!-- Items Header Title -->
+                                         <tr >
+                                        <td   >
+                                            <table align="center" style="border-bottom: 2px black solid; padding: 0 50px; width: 500px;"  >
+                                                <tbody >
+                                                    <tr >
+                                                        <td align="center" style="text-transform: uppercase;">
+                                                            <h3 style="padding-top:20px; margin: 4px 0;">Your Items</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                     </tr>
+                                        <!-- Items Details -->
+                                         {% for item in order.user.items %}
+                                         <tr align="center">
+                                            <td>
+                                            <table >
+                                                <tbody >
+                                                    <tr >
+                                                        <td width="30%">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img style="width: 100px;" src={{item.image}} alt={{item.title}}>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </td>
+                                                        <td>
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>{{item.title}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="font-weight:300; font-size:14px; padding: 0; ">Item {{item.id | prepend: ": #"}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="font-weight:300; font-size:14px; padding: 0;">Style{{item.style| prepend: ": " }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="font-weight:300; font-size:14px; padding: 0;">Color: {{item.color}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="font-weight:300; font-size:14px; padding: 0;">Quantity: {{item.qty}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="font-weight:300; font-size:14px; padding: 0;">Price: {{item.price | prepend: "$"}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                         </tr>
+                                         {% endfor %}
+                                         <!-- Border -->
+                                          <tr>
+                                            <td>
+                                                <table align="center" style="border-bottom: 2px black solid; padding: 0 50px; width: 90%;" >
+                                                    <tbody>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                          </tr>
+                                          <!-- Transaction Cost -->
+                                           <tr>
+                                            <td>
+                                                <table style="padding: 0 70px; font-weight:300; font-size:14px; " align="center" width="100%">
+                                                    <tbody >
+                                                        <tr>
+                                                            <td>
+                                                                <table align="left" width="50%" style="text-align: left;">
+                                                                    <tbody>
+                                                                         <tr>
+                                                                            <td>
+                                                                            Subtotal
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Shipping Standard
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Sales Tax
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                            <td align="right">
+                                                                <table width="50%" style="text-align: right;">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                {% assign subtotal = 0 %}
+                                                                                {% for item in order.user.items %}
+                                                                                {% assign item_price = item.price | times: item.qty %}
+                                                                                {% assign subtotal = subtotal | plus: item_price %}
+                                                                            {% endfor %}
+
+                                                                            ${{ subtotal | round: 2 }}
+                                                                            
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                ${{order.user.shipping_cost | round: 2}}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                {% assign notax = subtotal |plus: order.user.shipping_cost%}
+                                                                                {{ notax | times: 0.075 | round: 2 | prepend: "$"}}
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                           </tr>
+                                           <!-- Border -->
+                                            <tr>
+                                            <td>
+                                                <table align="center" style="border-bottom: 2px black solid; padding: 0 50px; width: 90%;" >
+                                                    <tbody>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                          </tr>
+                                            <!-- Total Cost -->
+                                             <tr>
+                                                <td>
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    Total:
+                                                                </td>
+                                                                <td>
+
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                             </tr>
+                                             <!-- Thank You -->
+                                              <tr></tr>
+                                              <!-- Footer: Was Sent To -->
+                                               <!-- Contact US -->
+                                                <!-- Address -->
+                             </tbody>
+                         </table>
+                         <!-- End -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+    </script>
+
+    <div id="result">
+
+    </div>
+    <!--for development-->
+    <script src="https://cdn.jsdelivr.net/npm/liquidjs/dist/liquid.browser.umd.js"></script>
+    <script>
+        const template = document.querySelector('[type = "text/template"]')
+        const result = document.querySelector('#result')
+
+        const engine = new liquidjs.Liquid()
+
+
+        engine
+            .parseAndRender(template.innerHTML, {
+                business: {
+                    name: "Ebony Esthetics"
+                },
+                order: {
+                    id: "12345678",
+                    type: "booking",
+                    user: {
+                        shipping: {
+                            first_name: "jane",
+                            last_name: "doe",
+                            address: "8901 S 620th Rd",
+                            city: "Miami",
+                            state: "Illinios",
+                            zip: "39101",
+                            country: "us"
+                        },
+                        billing: {
+                            first_name: "jane",
+                            last_name: "doe",
+                            address: "8901 S 620th Rd",
+                            city: "Chicago",
+                            state: "Illinios",
+                            zip: "39101",
+                            country: "us"
+                        },
+                        payment_method: "PayPal",
+                        items: [
+                            {
+                                id: 1,
+                                title: "Nine Lives",
+                                image: "./assets/img/blacknat.jpg",
+                                style: "1a123456",
+                                color: "black / Natural Color",
+                                qty: 1,
+                                price: 55.65
+                            },
+                            {
+                                id: 2,
+                                title: "Light Bright",
+                                image: "./assets/img/whitebright.jpg",
+                                style: "1b987654",
+                                color: "white / bright",
+                                qty: 1,
+                                price: 45.94
+                            },
+                            {
+                                id: 3,
+                                title: "Tsunami",
+                                image: "./assets/img/blueocean.jpg",
+                                style: "1c246810",
+                                color: "blue / ocean",
+                                qty: 1,
+                                price: 52.46,
+                            }
+                        ],
+                        shipping_cost: 10.35,
+
+
+                        user1: { username: "joker234NYC", location: { city: "New York", state: "new york" } }, cart: {
+                            total: 45.99
+                        }
+
+                    }
+
+
+                },
+
+            })
+            .then(html => result.innerHTML = html)
+    </script>
+</body>
+
+</html>

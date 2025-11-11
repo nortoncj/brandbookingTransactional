@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid</title>
+</head>
+
+<body>
+
+    <script type="text/template">
+        {% assign names = "Joe, James, Billy, Raul, Bryant" | split: ", " %}
+        {% for name in names reversed %}
+        <li>My name is {{ name }}</li>
+        {% endfor %}
+        
+    </script>
+
+    <div id="result">
+
+    </div>
+    <!--for development-->
+    <script src="https://cdn.jsdelivr.net/npm/liquidjs/dist/liquid.browser.umd.js"></script>
+    <script>
+        const template = document.querySelector('[type = "text/template"]')
+        const result = document.querySelector('#result')
+
+        const engine = new liquidjs.Liquid()
+
+        engine
+            .parseAndRender(template.innerHTML, {
+                order: {
+                    id: "12345678",
+                    user: {
+                        shipping: {
+                            first_name: "john",
+                            last_name: "doe",
+                            city: "Miami",
+                            state: "Florida",
+                            zip: "39101",
+                            country: "us"
+                        },
+                        billing: {
+                            first_name: "john",
+                            last_name: "doe",
+                            city: "Miami",
+                            state: "Florida",
+                            zip: "39101",
+                            country: "us"
+                        },
+                        payment_method: "PayPal",
+                        items: {
+                            {
+                    id:
+                            }
+                        },
+                shipping: 10.00,
+                        
+                    }
+                    
+
+                },
+                user: { username: "joker234NYC", location: { city: "New York", state: "new york" } }, cart: {
+                total: 45.99
+            }
+            })
+            .then(html => result.innerHTML = html)
+    </script>
+</body>
+
+</html>
